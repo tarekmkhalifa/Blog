@@ -26,8 +26,10 @@
                 <td>{{$post['posted_by']}}</td>
                 <td>{{$post['creation_date']}}</td>
                 <td class="d-flex gap-3">
-                    <x-button type=”primary”>View</x-button>
-
+                    {{-- <x-button type="primary" name="Show">an</x-button>
+                    <x-button type="secondary" name="Edit"></x-button>
+                    <x-button type="danger" name="Delete"></x-button> --}}
+                    
                     <a class="btn btn-sm btn-secondary" title="show" href="{{route('posts.show',$post['id'])}}"><i class="fa-regular fa-eye"></i></a>
                     <a class="btn btn-sm btn-warning" title="edit" href="{{route('posts.edit',$post['id'])}}"><i class="fa-regular fa-pen-to-square"></i></a>
                     <form method="POST" action="{{route('posts.destroy',$post['id'])}}">
