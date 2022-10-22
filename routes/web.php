@@ -3,7 +3,7 @@
 use App\Http\Controllers\Posts\PostController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', [PostController::class, 'index'])->name('posts.index'); //home page
+Route::get('/', [PostController::class, 'index'])->name('posts.index'); //home page
 // Route::get('/posts', [PostController::class, 'index'])->name('posts.index'); //home page
 // Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create'); //create page
 // Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show'); //show page
