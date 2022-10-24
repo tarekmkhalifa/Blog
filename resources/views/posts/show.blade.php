@@ -1,13 +1,40 @@
 @extends('layouts.app')
 
 @section('title', 'Post')
-
 @section('main-content')
 
     <div class="post mt-5">
-        <h4 class="alert alert-secondary">Post Title: <span class="text-primary">{{$post['title']}}</span></h4>
-        <h4 class="alert alert-secondary">Posted By: <span class="text-primary">{{$post['posted_by']}}</span></h4>
-        <h4 class="alert alert-secondary">Date of post: <span class="text-primary">{{$post['creation_date']}}</span></h4>
-        <a class="btn btn-warning" href="{{route('posts.edit',$post['id'])}}">Edit Post</a>
+        <div class="post-info border mb-3 p-3">
+            <h3 class="alert alert-secondary">Post Info:</h3>
+            <h4 class="alert py-0 my-0">Post Title: <span class="text-primary">{{ $post->title }}</span></h4>
+            <h4 class="alert">
+                Post Description:
+                 <p class="text-primary">{{ $post->details }}</p>
+            </h4>
+        </div>
+
+        <div class="creator-info border mb-3 p-3">
+            <h3 class="alert alert-secondary">Post Creator Info:</h3>
+            <h4 class="alert m-0 mb-2 p-0">Name: <span class="text-primary">{{ $post->user->name }}</span></h4>
+            <h4 class="alert m-0 mb-2 p-0">
+                Email: <span class="text-primary">{{ $post->user->email }}</span>
+            </h4>
+            <h4 class="alert m-0 mb-2 p-0">
+                Created At: <span class="text-primary">
+                    <span class="text-primary">{{ $post->created_at->format('Y/m/d') }}</span>
+                    <span class="text-success">{{ $post->created_at->format('H:i:s') }}</span>
+                </span>
+            </h4>
+            <h4 class="alert m-0 mb-2 p-0">
+                Last Updated: <span class="text-primary">
+                    <span class="text-primary">{{ $post->updated_at->format('Y/m/d') }}</span>
+                    <span class="text-success">{{ $post->updated_at->format('H:i:s') }}</span>
+                </span>
+            </h4>
+
+        </div>
+
+
+        <a class="btn btn-warning mb-3" href="{{ route('posts.edit', $post->id) }}">Edit Post</a>
     </div>
 @endsection

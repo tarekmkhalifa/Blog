@@ -18,14 +18,20 @@
   <header>
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-          <a class="text-white navbar-brand" href="{{route('posts.index')}}">All Posts</a>
+          <a class="text-white navbar-brand" href="{{route('posts.index')}}">Blog</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto me-auto">
               <li class="nav-item">
-                <a class="text-white nav-link active" aria-current="page" href="{{route('posts.index')}}">Home</a>
+                <a class="text-white nav-link" aria-current="page" href="{{route('posts.index')}}">All Posts</a>
+              </li>
+              <li class="nav-item">
+                <a class="text-white nav-link" aria-current="page" href="{{route('posts.deleted')}}">Deleted Posts</a>
+              </li>
+              <li class="nav-item">
+                <a class="text-white nav-link" aria-current="page" href="{{route('users.create')}}">Add User</a>
               </li>
             </ul>
           </div>
@@ -34,6 +40,12 @@
     </header>
   <main>
     <div class="container">
+              {{-- Display success Msg --}}
+              @if (session()->has('message'))
+              <div class="mt-3 text-center alert alert-success">
+                  {{ session()->get('message') }}
+              </div>
+          @endif
         @yield('main-content')
     </div>
   </main>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Posts\PostController;
+use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index'); //home page
@@ -14,3 +15,11 @@ Route::get('/', [PostController::class, 'index'])->name('posts.index'); //home p
 
 
 Route::resource('posts', PostController::class); //resource route for post controller
+Route::get("users/create", [UserController::class,'create'])->name('users.create'); //create new user page
+Route::post("users/store", [UserController::class,'store'])->name('users.store'); //stpre new user
+
+
+
+Route::get('deleted/posts', [PostController::class,'deletedPosts'])->name('posts.deleted'); // deleted posts page
+Route::post('restore/posts/{id}', [PostController::class,'restorePost'])->name('posts.restore'); // restore post
+// Route::delete('deleted/posts/{id}', [PostController::class,'deleteForEver'])->name('posts.deletePermently'); // delete post forever

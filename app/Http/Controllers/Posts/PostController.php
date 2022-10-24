@@ -2,70 +2,104 @@
 
 namespace App\Http\Controllers\Posts;
 
-use App\Http\Controllers\Controller;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
-    public $posts = [
-        ['id' => 1 , 'title' => 'laravel is cool', 'posted_by' => 'Ahmed', 'creation_date' => '2022-10-22'],
-        ['id' => 2 , 'title' => 'PHP deep dive', 'posted_by' => 'Mohamed', 'creation_date' => '2022-10-15'],
-        ['id' => 3 , 'title' => 'JavaScript deep dive', 'posted_by' => 'Tarek', 'creation_date' => '2022-10-22'],
-        ['id' => 4 , 'title' => 'PHP is lovely language', 'posted_by' => 'Osama', 'creation_date' => '2022-10-21'],
-        ['id' => 5 , 'title' => 'PHP deep dive', 'posted_by' => 'Mohamed', 'creation_date' => '2022-10-15'],
-    ];
 
     public function index()
     {
-        return view('posts.index', ['posts'=>$this->posts]);
-
-    }// end of index
+        $posts = Post::orderBy('updated_at', 'DESC')->paginate(10);
+        return view('posts.index', compact('posts'));
+    } // end of index
 
 
     public function create()
     {
-        return view('posts.create');
-
-    }// end of create
+        $users = User::all('id', 'name');
+        // dd($users);
+        return view('posts.create', compact('users'));
+    } // end of create
 
 
     public function store()
     {
-        return redirect(route('posts.index')); //redirect to index page
-
-    }// end of store
+        $formData = request()->all();
+        // dd($formData);
+        Post::create($formData);
+        //show success message
+        return to_route('posts.create')->with('message', 'Post created successfully');
+    } // end of store
 
 
     public function show($id)
     {
-        foreach($this->posts as $post){
-            if($post['id'] == $id){
-                return view('posts.show', ['post'=>$post]);
-            }
-        }
-
-    }// end of show
+        $post = Post::find($id);
+        return view('posts.show', compact('post'));
+    } // end of show
 
     public function edit($id)
     {
-        foreach($this->posts as $post){
-            if($post['id'] == $id){
-                return view('posts.edit', ['post'=>$post]);
-            }
-        }
-        
-    }// end of edit
+        $post = Post::findOrFail($id);
+        $users = User::all();
+        return view('posts.edit', compact('post', 'users'));
+    } // end of edit
 
     public function update($id)
     {
-        return redirect(route('posts.index')); //redirect to index page
+        // dd(request()->all());
+        $post = Post::find($id);
+        $post->title = request()->title;
+        $post->details = request()->details;
+        $post->user_id = request()->user_id;
+        $post->save();
+        //show success message
+        return to_route('posts.edit', $id)->with('message', 'Post updated successfully');
+    } // end of update
 
-    }// end of update
+    public function deletedPosts()
+    {
+
+        $posts = Post::onlyTrashed()->orderBy('updated_at', 'DESC')->paginate(10);
+        return view('posts.deleted', compact('posts')); //return delted posts page
+
+    } // end of delted posts
 
     public function destroy($id)
     {
-        return redirect(route('posts.index')); //redirect to index page
-        
-    }// end of destroy
+        $post = new Post();
+        $post = $post->find($id);
+        dd($post);
+        if ($post->trashed()) {
+            $post->delete();
+            // show success message
+            return to_route('posts.deleted')->with('message', 'Post deleted successfully');
 
+        } else {
+            $post->delete();
+            // show success message
+            return to_route('posts.index')->with('message', 'Post deleted successfully');
+        }
+
+    } // end of destroy
+
+    public function deleteForEver($id)
+    {
+        $post = Post::find($id);
+        dd($post); //null ?????
+
+        $post->forceDelete();
+        // show success message
+        return to_route('posts.deleted')->with('message', 'Post deleted successfully');
+    }
+
+    public function restorePost($id)
+    {
+        $post = Post::find($id);
+        dd($post); //null ?????
+
+    }
 }// end of class

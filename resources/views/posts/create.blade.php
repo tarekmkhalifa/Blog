@@ -9,23 +9,28 @@
         @csrf
     <div class="mb-3">
         <label for="title" class="form-label">Post Title</label>
-        <input type="text" class="form-control" id="title" placeholder="" value="">
+        <input type="text" class="form-control" name="title" id="title" placeholder="" value="">
       </div>
       <div class="mb-3">
-        <label for="posted_by" class="form-label">Posted By:</label>
-        <input type="text" class="form-control" id="posted_by" placeholder="" value="">
+        <label for="date" class="form-label">Description</label>
+        <textarea class="form-control" name="details" id="" cols="30" rows="5"></textarea>
       </div>
       <div class="mb-3">
-        <label for="date" class="form-label">Date of post</label>
-        <input type="text" class="form-control" id="date" placeholder="" value="">
-      </div>
+        <label for="posted_by" class="form-label">Post Creator:</label>
+        <select class="form-select" name="user_id">
+            @foreach ($users as $user)
+                <option value="{{ $user->id }}">
+                    {{ $user->name }}
+                </option>
+            @endforeach
 
+        </select>
+    </div>
       <button type="submit" class="mt-3 btn btn-outline-primary">
             Create Post
       </button>
     </form>
 
     <!-- Create Post Content -->
-
 
 @endsection
