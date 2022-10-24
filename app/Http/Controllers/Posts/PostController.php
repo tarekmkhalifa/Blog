@@ -72,37 +72,25 @@ class PostController extends Controller
 
     public function destroy($id)
     {
-        dd($id);
-        $post = new Post();
-        $post = $post->find($id);
-        if ($post->trashed()) {
-            $post->delete();
-            // show success message
-            return to_route('posts.deleted')->with('message', 'Post deleted successfully');
-
-        } else {
-            // dd($post);
-            $post->delete();
-            // show success message
-            return to_route('posts.index')->with('message', 'Post deleted successfully');
-        }
+        Post::find($id)->delete(); //soft delete
+        // show success message
+        return to_route('posts.index')->with('message', 'Post deleted successfully');
 
     } // end of destroy
 
-    // public function deleteForEver($id)
-    // {
-    //     $post = Post::find($id);
-    //     dd($post); //null ?????
-
-    //     $post->forceDelete();
-    //     // show success message
-    //     return to_route('posts.deleted')->with('message', 'Post deleted successfully');
-    // }
+    public function deleteForEver($id)
+    {
+        Post::where('id', $id)->forceDelete();
+        // show success message
+        return to_route('posts.deleted')->with('message', 'Post deleted successfully');
+        
+    } // end of delte forever
 
     public function restorePost($id)
     {
-        $post = Post::find($id);
-        dd($post); //null ?????
+        Post::where('id', $id)->restore();
+        // show success message
+        return to_route('posts.deleted')->with('message', 'Post restored successfully');
 
-    }
+    } // end of restore post
 }// end of class

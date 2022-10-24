@@ -32,10 +32,10 @@
                                 <form method="POST" action="{{ route('posts.restore', $post->id) }}">
                                     @csrf
                                     <button class="btn btn-sm btn-success" type="submit"
-                                        title="delete"><i class="fa-solid fa-arrow-rotate-left"></i>
+                                        title="restore"><i class="fa-solid fa-arrow-rotate-left"></i>
                                     </button>
                                 </form>
-                                <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
+                                <form method="POST" action="{{ route('posts.deletePermently', $post->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('are you sure?')"
