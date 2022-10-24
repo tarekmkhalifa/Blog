@@ -23,10 +23,10 @@
                     <td>{{ $post->updated_at->format('Y/m/d')}}</td>
                     <td>{{ $post->deleted_at->format('Y/m/d H:i:s')}}</td>
                     <td class="d-flex gap-3">
-                        <a class="btn btn-sm btn-secondary" title="show" href="{{route('posts.show',$post->id)}}"><i
+                        <a class="btn btn-sm btn-secondary" title="show" href="{{route('posts.show',$post->slug)}}"><i
                                 class="fa-regular fa-eye"></i>
                         </a>
-                        <a class="btn btn-sm btn-warning" title="edit" href="{{ route('posts.edit', $post->id) }}"><i
+                        <a class="btn btn-sm btn-warning" title="edit" href="{{ route('posts.edit', $post->slug) }}"><i
                                 class="fa-regular fa-pen-to-square"></i></a>
                     
                                 <form method="POST" action="{{ route('posts.restore', $post->id) }}">

@@ -12,6 +12,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Slug</th>
                 <th scope="col">Posted By</th>
                 <th scope="col">Creation Date</th>
                 <th scope="col">Actions</th>
@@ -22,15 +23,16 @@
                 <tr>
                     <th scope="row">{{ $posts->firstItem() + $key }}</th>
                     <td>{{ $post->title }}</td>
+                    <td>{{ $post->slug }}</td>
                     <td>{{ $post->user->name }}</td>
                     <td>{{ $post->updated_at->format('Y/m/d')}}</td>
                     <td class="d-flex gap-3">
                         {{-- <x-button type="primary" name="Show">an</x-button>
                     <x-button type="secondary" name="Edit"></x-button>
                     <x-button type="danger" name="Delete"></x-button> --}}
-                        <a class="btn btn-sm btn-secondary" title="show" href="{{ route('posts.show', $post->id) }}"><i
+                        <a class="btn btn-sm btn-secondary" title="show" href="{{ route('posts.show', $post->slug) }}"><i
                                 class="fa-regular fa-eye"></i></a>
-                        <a class="btn btn-sm btn-warning" title="edit" href="{{ route('posts.edit', $post->id) }}"><i
+                        <a class="btn btn-sm btn-warning" title="edit" href="{{ route('posts.edit', $post->slug) }}"><i
                                 class="fa-regular fa-pen-to-square"></i></a>
                         <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
                             @csrf

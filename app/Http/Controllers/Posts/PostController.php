@@ -37,15 +37,15 @@ class PostController extends Controller
     } // end of store
 
 
-    public function show($id)
+    public function show($slug)
     {
-        $post = Post::find($id);
+        $post = Post::withTrashed()->where('slug', $slug)->get()->first();
         return view('posts.show', compact('post'));
     } // end of show
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::withTrashed()->where('slug', $slug)->get()->first();
         $users = User::all();
         return view('posts.edit', compact('post', 'users'));
     } // end of edit
@@ -64,7 +64,6 @@ class PostController extends Controller
 
     public function deletedPosts()
     {
-
         $posts = Post::onlyTrashed()->orderBy('updated_at', 'DESC')->paginate(10);
         return view('posts.deleted', compact('posts')); //return delted posts page
 
@@ -88,7 +87,7 @@ class PostController extends Controller
 
     public function restorePost($id)
     {
-        Post::where('id', $id)->restore();
+        Post::where('slug', $id)->restore();
         // show success message
         return to_route('posts.deleted')->with('message', 'Post restored successfully');
 
