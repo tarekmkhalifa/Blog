@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Edit post')
-@section('main-content')
+@section('content')
 
     <!-- Edit Post Content -->
     <h2 class="text-center mt-5 text-warning">Edit post</h2>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Post')
-@section('main-content')
+@section('content')
 
     <div class="post mt-5">
         <div class="post-info border mb-3 p-3">

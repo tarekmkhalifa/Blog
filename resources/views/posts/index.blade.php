@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 
-@section('main-content')
+@section('content')
 
     <h1 class="mt-5 text-center text-secondary">All Posts</h1>
     <a class="btn btn-primary" href="{{ route('posts.create') }}">Create Post</a>

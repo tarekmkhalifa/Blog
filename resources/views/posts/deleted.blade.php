@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Deleted posts')
-@section('main-content')
+@section('content')
 
     <h1 class="mt-5 text-center text-secondary">Deleted Posts</h1>
     <table class="table mt-3">

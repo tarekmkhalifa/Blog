@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Create post')
-@section('main-content')
+@section('content')
 
     <!-- Create Post Content -->
     <h2 class="text-center mt-5 text-primary">Create New Post</h2>

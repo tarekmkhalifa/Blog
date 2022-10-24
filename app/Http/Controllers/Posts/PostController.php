@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
@@ -25,7 +27,7 @@ class PostController extends Controller
     } // end of create
 
 
-    public function store()
+    public function store(StorePostRequest $request)
     {
         $formData = request()->all();
         // dd($formData);
@@ -48,7 +50,7 @@ class PostController extends Controller
         return view('posts.edit', compact('post', 'users'));
     } // end of edit
 
-    public function update($id)
+    public function update(UpdatePostRequest $request, $id)
     {
         // dd(request()->all());
         $post = Post::find($id);
@@ -70,15 +72,16 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+        dd($id);
         $post = new Post();
         $post = $post->find($id);
-        dd($post);
         if ($post->trashed()) {
             $post->delete();
             // show success message
             return to_route('posts.deleted')->with('message', 'Post deleted successfully');
 
         } else {
+            // dd($post);
             $post->delete();
             // show success message
             return to_route('posts.index')->with('message', 'Post deleted successfully');
@@ -86,15 +89,15 @@ class PostController extends Controller
 
     } // end of destroy
 
-    public function deleteForEver($id)
-    {
-        $post = Post::find($id);
-        dd($post); //null ?????
+    // public function deleteForEver($id)
+    // {
+    //     $post = Post::find($id);
+    //     dd($post); //null ?????
 
-        $post->forceDelete();
-        // show success message
-        return to_route('posts.deleted')->with('message', 'Post deleted successfully');
-    }
+    //     $post->forceDelete();
+    //     // show success message
+    //     return to_route('posts.deleted')->with('message', 'Post deleted successfully');
+    // }
 
     public function restorePost($id)
     {
