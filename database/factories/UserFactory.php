@@ -20,9 +20,9 @@ class UserFactory extends Factory
             // 'name' => $this->faker->name(10),
             // 'email' => $this->faker->unique()->email(20),
             // 'password' => $this->faker->password(20),
-            'name' => 'Tarek Khalifa',
-            'email' => 'tarek@admin.com',
-            'password' => bcrypt('Tarek@123')
+            'name' => 'Admin',
+            'email' => 'admin@iti.com',
+            'password' => bcrypt('admin')
         ];
     }
 }

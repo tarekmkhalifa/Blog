@@ -14,6 +14,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->unique()->text(10),
             'details' => $this->faker->text(200),
+            'image' => 'default.png',
             'user_id' => 1
             // 'user_id' => rand(1,4)
         ];

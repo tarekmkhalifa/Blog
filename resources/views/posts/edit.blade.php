@@ -5,7 +5,7 @@
 
     <!-- Edit Post Content -->
     <h2 class="text-center mt-5 text-warning">Edit post</h2>
-    <form method="POST" action="{{ route('posts.update', $post->id) }}">
+    <form method="POST" action="{{ route('posts.update', $post->slug) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -38,12 +38,19 @@
                 value="{{ $post->updated_at }}">
         </div>
 
-        <button type="submit" class="my-3 btn btn-outline-warning">
+
+
+        <div class="mb-3">
+            <label class="form-label">Post Image</label>
+            <div class="mb-2">
+                <img width="300" src="{{asset('images/posts/'.$post->image)}}" alt="post image">
+            </div>
+            <label for="date" class="form-label">Change image</label>
+            <input type="file" name="image" class="form-control">
+        </div>
+        <button type="submit" class="my-2 btn btn-outline-warning">
             Update Post
         </button>
     </form>
-
     <!-- Edit Post Content -->
-
-
 @endsection

@@ -31,10 +31,13 @@
                     <span class="text-success">{{ $post->updated_at->format('H:i:s') }}</span>
                 </span>
             </h4>
-
         </div>
-
-
-        <a class="btn btn-warning mb-3" href="{{ route('posts.edit', $post->id) }}">Edit Post</a>
+        <div class="creator-info border mb-3 p-3">
+            <h4 class="alert m-0 mb-2 p-0">
+            Post Image
+            </h4>
+            <img width="300" src="{{asset('images/posts/'.$post->image)}}" alt="post image">
+        </div>
+        <a class="btn btn-warning mb-3" href="{{ route('posts.edit', $post->slug) }}">Edit Post</a>
     </div>
 @endsection

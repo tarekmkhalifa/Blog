@@ -19,6 +19,7 @@ class Post extends Model
         'title',
         'details',
         'slug',
+        'image',
         'user_id'
 
     ]; // end of fillable
