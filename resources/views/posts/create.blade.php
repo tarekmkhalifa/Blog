@@ -33,7 +33,5 @@
             Create Post
       </button>
     </form>
-
     <!-- Create Post Content -->
-
 @endsection

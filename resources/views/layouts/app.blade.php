@@ -8,7 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Blog</title>
+    <title>
+        @yield('title')
+    </title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -79,6 +81,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('users.edit',auth()->user()->id) }}">
+                                        Profile
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -101,6 +106,11 @@
                         @if (session()->has('message'))
                         <div class="mt-3 text-center alert alert-success">
                             {{ session()->get('message') }}
+                        </div>
+                    @endif
+                        @if (session()->has('error'))
+                        <div class="mt-3 text-center alert alert-danger">
+                            {{ session()->get('error') }}
                         </div>
                     @endif
                                 {{-- Display errors Msg --}}
