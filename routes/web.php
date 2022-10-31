@@ -10,6 +10,7 @@ Route::resource('posts', PostController::class)->middleware(['auth']); //resourc
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [PostController::class, 'index'])->name('posts.index')->middleware(['auth']); //home page
+Route::get('deleted/allOldPosts', [PostController::class,'deleteAllOldPosts'])->name('posts.deleteOldPosts')->middleware(['auth']); //run job to delete old post since 2 years
 Route::get('deleted/posts', [PostController::class,'deletedPosts'])->name('posts.deleted')->middleware(['auth']); // deleted posts page
 Route::delete('deleted/posts/{id}', [PostController::class,'deleteForEver'])->name('posts.deletePermently')->middleware(['auth']); // delete post forever
 Route::post('restore/posts/{id}', [PostController::class,'restorePost'])->name('posts.restore')->middleware(['auth']); // restore post

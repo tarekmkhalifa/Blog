@@ -27,9 +27,6 @@
                     <td>{{ $post->user->name }}</td>
                     <td>{{ $post->updated_at->format('Y/m/d')}}</td>
                     <td class="d-flex gap-3">
-                        {{-- <x-button type="primary" name="Show">an</x-button>
-                    <x-button type="secondary" name="Edit"></x-button>
-                    <x-button type="danger" name="Delete"></x-button> --}}
                         <a class="btn btn-sm btn-secondary" title="show" href="{{ route('posts.show', $post->slug) }}"><i
                                 class="fa-regular fa-eye"></i></a>
                         <a class="btn btn-sm btn-warning" title="edit" href="{{ route('posts.edit', $post->slug) }}"><i

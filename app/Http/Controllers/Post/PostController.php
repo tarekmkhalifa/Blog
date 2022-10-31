@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Post;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Jobs\PruneOldPosts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
@@ -94,12 +95,21 @@ class PostController extends Controller
         return to_route('posts.edit', $slug)->with('message', 'Post updated successfully');
     } // end of update
 
+
     public function deletedPosts()
     {
         $posts = Post::onlyTrashed()->orderBy('updated_at', 'DESC')->paginate(10);
         return view('posts.deleted', compact('posts')); //return delted posts page
 
     } // end of delted posts
+
+    public function deleteAllOldPosts()
+    {
+        PruneOldPosts::dispatch();
+        // show success message
+        return to_route('posts.deleted')->with('message', 'Posts since 2 years will be deleted soon');
+
+    } // end of delete all old posts that created since more thant 2 years
 
     public function destroy($id)
     {

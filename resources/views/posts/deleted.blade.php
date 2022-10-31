@@ -3,6 +3,8 @@
 @section('content')
 
     <h1 class="mt-5 text-center text-secondary">Deleted Posts</h1>
+    <a class="btn btn-danger" href="{{ route('posts.deleteOldPosts') }}">Delete old posts</a>
+
     <table class="table mt-3">
         <thead>
             <tr>
@@ -20,7 +22,7 @@
                     <th scope="row">{{ $posts->firstItem() + $key }}</th>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->user->name }}</td>
-                    <td>{{ $post->updated_at->format('Y/m/d')}}</td>
+                    <td>{{ $post->created_at->format('Y/m/d')}}</td>
                     <td>{{ $post->deleted_at->format('Y/m/d H:i:s')}}</td>
                     <td class="d-flex gap-3">
                         <a class="btn btn-sm btn-secondary" title="show" href="{{route('posts.show',$post->slug)}}"><i
