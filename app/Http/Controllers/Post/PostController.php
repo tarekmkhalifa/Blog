@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Post;
 use App\Models\Post;
 use App\Models\User;
 use App\Jobs\PruneOldPosts;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
@@ -87,6 +88,8 @@ class PostController extends Controller
         $formData['image'] = $imgName;
         // dd(request()->all());
         $post->title = request()->title;
+        $post->slug = Str::slug($post->title); //update slug
+        $slug = $post->slug; //update slug
         $post->details = request()->details;
         $post->image =  $imgName;
         $post->user_id = request()->user_id;
